@@ -1,12 +1,10 @@
 import React from 'react';
-import Question from './components/QuestionComponent';
-
+import './App.css';
+import mainpage from './sportriv.PNG';
 
 function App() {
   return (
-    <div className="App">
-      <Question />
-    </div>
+      <div className="main-background"></div>
   );
 }
 
