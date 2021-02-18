@@ -1,6 +1,8 @@
 body, html {
   margin: 0;
   background-color: #d77587;
+  font-family: Raleway, sans-serif;
+  font-size: 100%;
 }
 
 .Question {
@@ -12,23 +14,29 @@ body, html {
 
 .main-background {
   background-image: url('sportriv.png');
-  background-position: center;
+  background-position: 10%;
   background-size: contain;
   background-repeat: no-repeat;
   height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   position: relative;
 }
 
-.button-start-game {
+.home-text-container {
   position: absolute;
-  top: 43%;
-  left: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%) translateX(-50%);
-  margin: 0;
-  padding: 0.5% 10%;
+  right: 15%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+}
+
+.button-start-game {
+  margin: 6% 20%;
+  padding: 0.5% 6%;
   font-size: 2.2rem;
-  border: 1px solid rgb(135, 226, 241);
+  border: none;
   border-radius: 3%/15%;
   background-color: rgb(135, 226, 241);
   cursor: pointer;
@@ -39,9 +47,67 @@ body, html {
   font-family: Raleway, sans-serif;
   font-weight: 600;
   letter-spacing: 2px;
+  animation: fadeInStartGame ease-in-out 1s;
+  text-align: center;
 }
 
 .button-start-game:hover {
   background-color: rgb(86, 173, 187);
-  border-width: 3px;
+}
+
+@keyframes fadeInStartGame {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.button-to-home {
+  position: relative;
+  display: inline-block;
+  margin: 70px 100px;
+  padding: 0.5% 1.2%;
+  font-size: 1.2rem;
+  border-radius: 3%/15%;
+  background-color: rgb(135, 226, 241);
+  cursor: pointer;
+  transition: background-color 0.6s;
+  text-decoration: none;
+  color: inherit;
+  font-family: Raleway, sans-serif;
+  font-weight: 600;
+}
+
+.button-to-home:hover {
+  background-color: rgb(86, 173, 187);
+}
+
+.fa-angle-double-left {
+  margin-right: 5px;
+}
+
+.home-text {
+  animation: fadeIn ease-in-out 1s forwards;
+  margin: 0;
+  font-size: 1vw;
+  color: rgb(37, 71, 59);
+}
+
+.home-text h1 {
+  margin: 10px 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }

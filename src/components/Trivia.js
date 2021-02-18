@@ -5,8 +5,10 @@ class Trivia extends Component {
     render () {
         return (
             <div className="Trivia">
-                <NavLink exact to="/" ></NavLink>
-                <h1>This will be the question component</h1>
+                <NavLink className="button-to-home" exact to="/">
+                    <i class="fas fa-angle-double-left"></i>
+                    Back to Home
+                </NavLink>
             </div>
         )
     }
