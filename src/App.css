@@ -5,28 +5,19 @@ body, html {
   font-size: 100%;
 }
 
-.Question {
-  font-size: 20px;
-  text-align: center;
-  height: auto;
-  width: 100%;
-}
-
 .main-background {
   background-image: url('sportriv.png');
   background-position: 10%;
   background-size: contain;
   background-repeat: no-repeat;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
   position: relative;
 }
 
 .home-text-container {
   position: absolute;
   right: 15%;
+  bottom: 25%;
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
@@ -34,8 +25,8 @@ body, html {
 
 .button-start-game {
   margin: 6% 20%;
-  padding: 0.5% 6%;
-  font-size: 2.2rem;
+  font-size: 2vw;
+  padding: 0.3vw 3vw;
   border: none;
   border-radius: 3%/15%;
   background-color: rgb(135, 226, 241);
@@ -70,20 +61,20 @@ body, html {
   position: relative;
   display: inline-block;
   margin: 70px 100px;
-  padding: 0.5% 1.2%;
+  padding: 0.8% 1.2%;
   font-size: 1.2rem;
   border-radius: 3%/15%;
-  background-color: rgb(135, 226, 241);
+  background-color: rgb(62, 107, 114);
   cursor: pointer;
   transition: background-color 0.6s;
   text-decoration: none;
-  color: inherit;
+  color: white;
   font-family: Raleway, sans-serif;
   font-weight: 600;
 }
 
 .button-to-home:hover {
-  background-color: rgb(86, 173, 187);
+  background-color: rgb(38, 64, 68);
 }
 
 .fa-angle-double-left {
@@ -111,3 +102,85 @@ body, html {
     transform: none;
   }
 }
+
+
+/* trivia question container */
+
+.Trivia {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+}
+
+.trivia-question-container {
+  background-color: rgb(62, 107, 114);
+  height: 60vh;
+  width: 70vw;
+  border-radius: 5%/10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.Question {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 3%/25%;
+  font-size: 0.8vw;
+}
+
+.user-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+
+.trivia-multiple-choice-container {
+  height: 400px;
+  width: 70%;
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.multipleChoice {
+  width: 80%;
+  height: 17%;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: black;
+  margin: 15px 0;
+  border-radius: 1.2vw/1.2vw;
+  cursor: pointer;
+  font-size: 0.8vw;
+}
+
+.multipleChoice:hover {
+  background-color: rgba(255, 255, 255, 0.562);
+}
+
+.prev-next-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column wrap;
+}
+
+.prev-next-button {
+  width: 100%;
+  font-size: 0.8vw;
+  background-color: rgb(135, 226, 241);
+  border-radius: 7%/15%;
+  margin: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.prev-next-button:hover {
+  background-color: rgb(86, 173, 187);
+}
+
+
