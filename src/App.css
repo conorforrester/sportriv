@@ -11,24 +11,23 @@ body, html {
   background-size: contain;
   background-repeat: no-repeat;
   height: 100vh;
-  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .home-text-container {
-  position: absolute;
-  right: 15%;
-  bottom: 25%;
   display: flex;
   flex-flow: column wrap;
-  justify-content: center;
+  width: 25%;
+  margin-left: 60%;
 }
 
 .button-start-game {
-  margin: 6% 20%;
-  font-size: 2vw;
-  padding: 0.3vw 3vw;
+  margin: 20px 0;
+  font-size: 2rem;
+  padding: 0.5rem 1.2rem;
   border: none;
-  border-radius: 3%/15%;
+  border-radius: 10px;
   background-color: rgb(135, 226, 241);
   cursor: pointer;
   transition: background-color 0.6s;
@@ -58,33 +57,42 @@ body, html {
 }
 
 .button-to-home {
-  position: relative;
-  display: inline-block;
-  margin: 70px 100px;
-  padding: 0.8% 1.2%;
+  margin: 4rem 6rem;
+  padding: 1rem 1rem;
   font-size: 1.2rem;
-  border-radius: 3%/15%;
-  background-color: rgb(62, 107, 114);
+  border-radius: 10px;
+  background-color: rgb(135, 226, 241);
   cursor: pointer;
   transition: background-color 0.6s;
   text-decoration: none;
-  color: white;
+  color: black;
   font-family: Raleway, sans-serif;
   font-weight: 600;
+  width: 30%;
+  text-align: center;
 }
 
 .button-to-home:hover {
-  background-color: rgb(38, 64, 68);
+  background-color: rgb(86, 173, 187);
 }
 
 .fa-angle-double-left {
   margin-right: 5px;
 }
 
+.question-tracker {
+  background-color: rgb(62, 107, 114);
+  height: 5vw;
+  width: 20vw;
+  border-radius: 10px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+}
+
 .home-text {
   animation: fadeIn ease-in-out 1s forwards;
   margin: 0;
-  font-size: 1vw;
+  font-size: 1rem;
   color: rgb(37, 71, 59);
 }
 
@@ -105,19 +113,22 @@ body, html {
 
 
 /* trivia question container */
-
 .Trivia {
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-flow: column wrap;
+}
+
+.trivia-top-menu {
+  display: flex;
+  align-items: center;
 }
 
 .trivia-question-container {
   background-color: rgb(62, 107, 114);
   height: 60vh;
   width: 70vw;
-  border-radius: 5%/10%;
+  border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -126,21 +137,29 @@ body, html {
 
 .Question {
   background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 3%/25%;
-  font-size: 0.8vw;
+  border-radius: 10px;
+  font-size: 1rem;
+  width: 95%;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.br {
+  margin-top: 15px;
+  width: 95%;
+  height: 1px;
+  background-color: black;
+  background-image: linear-gradient(to right, rgb(135, 226, 241), rgb(129, 61, 61))
 }
 
 .user-buttons-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
+  width: 95%;
 }
 
 .trivia-multiple-choice-container {
   height: 400px;
   width: 70%;
-  margin-top: 5%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -153,9 +172,10 @@ body, html {
   background-color: rgba(255, 255, 255, 0.9);
   color: black;
   margin: 15px 0;
-  border-radius: 1.2vw/1.2vw;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 0.8vw;
+  font-size: 15px;
+  text-align: center;
 }
 
 .multipleChoice:hover {
@@ -165,15 +185,16 @@ body, html {
 .prev-next-buttons {
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-flow: column wrap;
+  width: 30%;
+  align-items: center;
 }
 
 .prev-next-button {
-  width: 100%;
-  font-size: 0.8vw;
+  width: 80%;
+  font-size: 15px;
   background-color: rgb(135, 226, 241);
-  border-radius: 7%/15%;
+  border-radius: 10px;
   margin: 20px;
   text-align: center;
   cursor: pointer;
