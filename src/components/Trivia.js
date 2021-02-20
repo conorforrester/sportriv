@@ -59,7 +59,7 @@ class Trivia extends Component {
                     <div className="trivia-top-menu">
                         <NavLink className="button-to-home" exact to="/">
                             <i className="fas fa-angle-double-left"></i>
-                            Home
+                            Quit
                         </NavLink>
                         <div className="question-tracker">
                             <h1>Question {this.state.questionIndex + 1} of 20</h1>
@@ -91,8 +91,24 @@ class Trivia extends Component {
                                 <MultipleChoice />
                             </div>
                             <div className="prev-next-buttons">
-                                <button type="button" className="prev-next-button" onClick={this.prevQuestion}> Previous </button>
-                                <button type="button" className="prev-next-button" onClick={this.nextQuestion}> Next </button>
+                                {this.state.questionIndex + 1 !== 1 ? 
+                                    <button 
+                                        type="button" 
+                                        className="prev-next-button" 
+                                        onClick={this.prevQuestion}
+                                    > 
+                                        Previous 
+                                    </button> : null
+                                }
+                                {this.state.questionIndex + 1 !== 20 ? 
+                                    <button 
+                                    type="button" 
+                                    className="prev-next-button" 
+                                    onClick={this.nextQuestion}
+                                    > 
+                                        Next 
+                                    </button> : null
+                                }   
                             </div>
                         </div>
                     </div>

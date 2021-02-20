@@ -257,8 +257,12 @@ body, html {
 }
 
 .prev-next-button {
+  outline: none;
+  border: none;
+  padding: 1rem;
+  font-weight: 600;
   width: 80%;
-  font-size: 15px;
+  font-size: 1.5rem;
   background-color: rgb(135, 226, 241);
   border-radius: 10px;
   margin: 20px;
