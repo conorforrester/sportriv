@@ -5,7 +5,7 @@ class Question extends Component {
     render () {
         return (
             <div className="Question">
-                <h1> Hi there, I am a future question!!!???</h1>
+                <h1>{this.props.question}</h1>
             </div>
         )
     }

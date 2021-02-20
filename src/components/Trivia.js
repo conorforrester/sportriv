@@ -23,18 +23,23 @@ const timerProps = {
 
 const getTimeSeconds = (time) => (minuteSeconds - time) | 0;
 
+
 class Trivia extends Component {
     constructor(props) {
         super(props);
         this.state = {
             score: 0,
             questionIndex: 0, //question number, start at index 0 for simplicity
-            gameOver: false
+            gameOver: false,
+            questions: []
         };
+        //binding methods
         this.nextQuestion = this.nextQuestion.bind(this);
         this.prevQuestion = this.prevQuestion.bind(this);
+        this.finishQuiz = this.finishQuiz.bind(this);
     }
 
+    //Three quiz button methods
     nextQuestion() {
         this.setState({
             questionIndex: this.state.questionIndex + 1
@@ -46,12 +51,50 @@ class Trivia extends Component {
         });
     }
 
+    finishQuiz() {
+        this.setState({
+            questionIndex: 0,
+            gameOver: true
+        });
+    }
+
     render () {
 
         const stratTime = Date.now() / 1000; // use UNIX timestamp in seconds
         const endTime = stratTime + 243248; // use UNIX timestamp in seconds
       
         const remainingTime = endTime - stratTime;
+
+
+            fetch('https://opentdb.com/api.php?amount=20&category=21&type=multiple')
+            .then(res => res.json())
+            .then(questions => {
+                // console.log(questions);
+                questions.results.map( question => {
+                    const formatQuestion = {
+                        question: questions.question
+                    }
+                    // console.log(question);
+
+                    const incorrectAnswerChoices = [...question.incorrect_answers];
+                    // console.log(incorrectAnswerChoices);
+                    formatQuestion.answer = Math.floor(Math.random()* 3) + 1;
+                    incorrectAnswerChoices.splice(
+                        formatQuestion.answer - 1, 0 , formatQuestion.correctanswer
+                    );
+
+                    incorrectAnswerChoices.forEach((choice, index) => {
+                        formatQuestion["choice" + (index + 1)] = choice;
+                    });
+
+                    console.log(formatQuestion);
+                    return formatQuestion;
+                });
+            })
+            .catch( err => {
+                console.log(err);
+            })
+        
 
         return (
             <div className="trivia-background-picture">
@@ -81,7 +124,7 @@ class Trivia extends Component {
                         </div>
                     </div>
                     <div className="trivia-question-container">
-                        <Question />
+                        <Question question={this.state.questions} />
                         <div className="br"></div>
                         <div className="user-buttons-container">
                             <div className="trivia-multiple-choice-container">
@@ -107,7 +150,14 @@ class Trivia extends Component {
                                     onClick={this.nextQuestion}
                                     > 
                                         Next 
-                                    </button> : null
+                                    </button> : 
+                                    <button 
+                                    type="button" 
+                                    className="finished-button" 
+                                    onClick={this.finishQuiz}
+                                    > 
+                                        Finish 
+                                    </button> 
                                 }   
                             </div>
                         </div>
