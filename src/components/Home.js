@@ -8,7 +8,7 @@ function Home() {
         <div className="home-text-container">
           <div className="home-text">
             <h1>Test your sports knowledge!</h1>
-            <h1>20 questions per game.</h1>
+            <h1>3 minutes to answer 20 questions.</h1>
             <h1>Answer 15 correctly to win!</h1>
           </div>
           <NavLink to="/trivia" className="button-start-game" >

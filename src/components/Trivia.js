@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import MultipleChoice from './MultipleChoice';
 import Question from './Question';
-import PrevNextButton from './PrevNextButton';
 
 const minuteSeconds = 180;
 
@@ -25,6 +24,28 @@ const timerProps = {
 const getTimeSeconds = (time) => (minuteSeconds - time) | 0;
 
 class Trivia extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            score: 0,
+            questionIndex: 0, //question number, start at index 0 for simplicity
+            gameOver: false
+        };
+        this.nextQuestion = this.nextQuestion.bind(this);
+        this.prevQuestion = this.prevQuestion.bind(this);
+    }
+
+    nextQuestion() {
+        this.setState({
+            questionIndex: this.state.questionIndex + 1
+        });
+    }
+    prevQuestion() {
+        this.setState({
+            questionIndex: this.state.questionIndex - 1
+        });
+    }
+
     render () {
 
         const stratTime = Date.now() / 1000; // use UNIX timestamp in seconds
@@ -36,6 +57,13 @@ class Trivia extends Component {
             <div className="trivia-background-picture">
                 <div className="Trivia">
                     <div className="trivia-top-menu">
+                        <NavLink className="button-to-home" exact to="/">
+                            <i className="fas fa-angle-double-left"></i>
+                            Home
+                        </NavLink>
+                        <div className="question-tracker">
+                            <h1>Question {this.state.questionIndex + 1} of 20</h1>
+                        </div>
                         <div className="timer-wrapper">
                             <CountdownCircleTimer
                                 {...timerProps}
@@ -50,13 +78,6 @@ class Trivia extends Component {
                                 renderTime("seconds", getTimeSeconds(elapsedTime))
                                 }
                             </CountdownCircleTimer>
-                            </div>
-                        <NavLink className="button-to-home" exact to="/">
-                            <i className="fas fa-angle-double-left"></i>
-                            Back to Home
-                        </NavLink>
-                        <div className="question-tracker">
-                            <h1>Question 1 of 10</h1>
                         </div>
                     </div>
                     <div className="trivia-question-container">
@@ -70,8 +91,8 @@ class Trivia extends Component {
                                 <MultipleChoice />
                             </div>
                             <div className="prev-next-buttons">
-                                <PrevNextButton action="Previous" />
-                                <PrevNextButton action="Next" />
+                                <button type="button" className="prev-next-button" onClick={this.prevQuestion}> Previous </button>
+                                <button type="button" className="prev-next-button" onClick={this.nextQuestion}> Next </button>
                             </div>
                         </div>
                     </div>
