@@ -5,7 +5,7 @@ class MultipleChoice extends Component {
     render () {
         return (
             <div className="multipleChoice">
-                <h1>{this.props.multiplechoice}</h1>
+                <h1>{this.props.multipleChoice}</h1>
             </div>
         )
     }

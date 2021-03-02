@@ -31,7 +31,12 @@ class Trivia extends Component {
             score: 0,
             questionIndex: 0, //question number, start at index 0 for simplicity
             gameOver: false,
-            questions: []
+            incorrectAnswer: '',
+            correctAnswer: '',
+            questions: [],
+            question: null,
+            loading: true,
+            error: null
         };
         //binding methods
         this.nextQuestion = this.nextQuestion.bind(this);
@@ -42,12 +47,14 @@ class Trivia extends Component {
     //Three quiz button methods
     nextQuestion() {
         this.setState({
-            questionIndex: this.state.questionIndex + 1
+            questionIndex: this.state.questionIndex + 1,
+            question: this.state.questions[this.state.questionIndex]
         });
     }
     prevQuestion() {
         this.setState({
-            questionIndex: this.state.questionIndex - 1
+            questionIndex: this.state.questionIndex - 1,
+            question: this.state.questions[this.state.questionIndex]
         });
     }
 
@@ -58,43 +65,46 @@ class Trivia extends Component {
         });
     }
 
+    componentDidMount() {
+        fetch('https://opentdb.com/api.php?amount=20&category=21&type=multiple')
+        .then(response => response.json())
+        .then(result => {
+            this.setState({
+                loading: false,
+                question: result.results[0].question,
+                questions: result.results
+            })
+        },
+        (error) => {
+            this.setState({
+                loading: false,
+                error
+            });
+        }
+        )
+    }
+
     render () {
+        //bring in state values to be used/mapped in the return method
+        const { score, questionIndex, gameOver, correctAnswer, incorrectAnswer, questions, question, loading, error } = this.state;
+
+
+        // const formatQuestion = {
+        //     question: questions.question
+        // }
+
+        // const incorrectAnswerChoices = [...question.incorrect_answers];
+
+        // formatQuestion.answer = Math.floor(Math.random()* 3) + 1;
+        // incorrectAnswerChoices.splice(
+        //     formatQuestion.answer - 1, 0 , formatQuestion.correctanswer
+        // );
+        
 
         const stratTime = Date.now() / 1000; // use UNIX timestamp in seconds
         const endTime = stratTime + 243248; // use UNIX timestamp in seconds
-      
-        const remainingTime = endTime - stratTime;
-
-
-            fetch('https://opentdb.com/api.php?amount=20&category=21&type=multiple')
-            .then(res => res.json())
-            .then(questions => {
-                // console.log(questions);
-                questions.results.map( question => {
-                    const formatQuestion = {
-                        question: questions.question
-                    }
-                    // console.log(question);
-
-                    const incorrectAnswerChoices = [...question.incorrect_answers];
-                    // console.log(incorrectAnswerChoices);
-                    formatQuestion.answer = Math.floor(Math.random()* 3) + 1;
-                    incorrectAnswerChoices.splice(
-                        formatQuestion.answer - 1, 0 , formatQuestion.correctanswer
-                    );
-
-                    incorrectAnswerChoices.forEach((choice, index) => {
-                        formatQuestion["choice" + (index + 1)] = choice;
-                    });
-
-                    console.log(formatQuestion);
-                    return formatQuestion;
-                });
-            })
-            .catch( err => {
-                console.log(err);
-            })
         
+        const remainingTime = endTime - stratTime;
 
         return (
             <div className="trivia-background-picture">
@@ -124,14 +134,21 @@ class Trivia extends Component {
                         </div>
                     </div>
                     <div className="trivia-question-container">
-                        <Question question={this.state.questions} />
+                        {error ? <div>Error: {error.message}</div> :
+                        loading || !question ? <div>Loading...</div> : 
+                        <Question question={question} /> }
                         <div className="br"></div>
                         <div className="user-buttons-container">
                             <div className="trivia-multiple-choice-container">
+                                {error ? <div>Error: {error.message}</div> : 
+                                loading ? <div>Loading...</div> : 
+                                questions.map(q => (
+                                    <div>{q.question}</div>
+                                ))}
+                                {/* <MultipleChoice multiplceChoice={this.state.correctAnswer}/>
                                 <MultipleChoice />
                                 <MultipleChoice />
-                                <MultipleChoice />
-                                <MultipleChoice />
+                                <MultipleChoice /> */}
                             </div>
                             <div className="prev-next-buttons">
                                 {this.state.questionIndex + 1 !== 1 ? 
