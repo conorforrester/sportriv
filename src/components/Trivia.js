@@ -1,3 +1,4 @@
+  
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
@@ -68,12 +69,13 @@ class Trivia extends Component {
     componentDidMount() {
         fetch('https://opentdb.com/api.php?amount=20&category=21&type=multiple')
         .then(response => response.json())
-        .then(result => {
+        .then(data => {
             this.setState({
                 loading: false,
-                question: result.results[0].question,
-                questions: result.results
+                question: data.results[0].question,
+                questions: data.results
             })
+            console.log(this.state.questions);
         },
         (error) => {
             this.setState({
@@ -89,18 +91,6 @@ class Trivia extends Component {
         const { score, questionIndex, gameOver, correctAnswer, incorrectAnswer, questions, question, loading, error } = this.state;
 
 
-        // const formatQuestion = {
-        //     question: questions.question
-        // }
-
-        // const incorrectAnswerChoices = [...question.incorrect_answers];
-
-        // formatQuestion.answer = Math.floor(Math.random()* 3) + 1;
-        // incorrectAnswerChoices.splice(
-        //     formatQuestion.answer - 1, 0 , formatQuestion.correctanswer
-        // );
-        
-
         const stratTime = Date.now() / 1000; // use UNIX timestamp in seconds
         const endTime = stratTime + 243248; // use UNIX timestamp in seconds
         
@@ -115,7 +105,7 @@ class Trivia extends Component {
                             Quit
                         </NavLink>
                         <div className="question-tracker">
-                            <h1>Question {this.state.questionIndex + 1} of 20</h1>
+                            <h1>Question {questionIndex + 1} of 20</h1>
                         </div>
                         <div className="timer-wrapper">
                             <CountdownCircleTimer
@@ -140,18 +130,18 @@ class Trivia extends Component {
                         <div className="br"></div>
                         <div className="user-buttons-container">
                             <div className="trivia-multiple-choice-container">
-                                {error ? <div>Error: {error.message}</div> : 
+                                {/* {error ? <div>Error: {error.message}</div> : 
                                 loading ? <div>Loading...</div> : 
                                 questions.map(q => (
                                     <div>{q.question}</div>
-                                ))}
-                                {/* <MultipleChoice multiplceChoice={this.state.correctAnswer}/>
+                                ))} */}
+                                <MultipleChoice multiplceChoice={this.state.correctAnswer}/>
                                 <MultipleChoice />
                                 <MultipleChoice />
-                                <MultipleChoice /> */}
+                                <MultipleChoice />
                             </div>
                             <div className="prev-next-buttons">
-                                {this.state.questionIndex + 1 !== 1 ? 
+                                {questionIndex + 1 !== 1 ? 
                                     <button 
                                         type="button" 
                                         className="prev-next-button" 
@@ -160,7 +150,7 @@ class Trivia extends Component {
                                         Previous 
                                     </button> : null
                                 }
-                                {this.state.questionIndex + 1 !== 20 ? 
+                                {questionIndex + 1 !== 20 ? 
                                     <button 
                                     type="button" 
                                     className="prev-next-button" 
